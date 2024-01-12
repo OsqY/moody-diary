@@ -1,3 +1,4 @@
+
 import Editor from "@/components/Editor"
 import { getUserByClerkId } from "@/utils/auth"
 import { prisma } from "@/utils/db"
@@ -8,7 +9,7 @@ const getEntry = async (id) => {
     where: {
       userId_id: {
         userId: user.id,
-        id,
+        id: id,
       },
     },
     include: {
@@ -21,7 +22,7 @@ const getEntry = async (id) => {
 const EntryPage = async ({ params }) => {
   const entry = await getEntry(params.id)
   return (
-    <div className="col-span-2">
+    <div className="h-full w-full">
       <Editor entry={entry} />
     </div>
   )

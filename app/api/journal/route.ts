@@ -18,11 +18,7 @@ export const POST = async () => {
     data: {
       userId: user.id,
       entryId: entry.id,
-      mood: analysis?.mood,
-      summary: analysis.mood,
-      subject: analysis?.subject,
-      color: analysis?.color,
-      negative: analysis?.negative,
+      ...analysis,
     },
   })
   revalidatePath('/journal')
