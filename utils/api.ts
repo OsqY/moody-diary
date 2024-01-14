@@ -40,3 +40,25 @@ export const askQuestion = async (question) => {
     return data.data
   }
 }
+
+export const createNewTask = async () => {
+  const res = await fetch(new Request(createUrl('/api/tasks'), {
+    method: 'POST',
+  }))
+  if (res.ok) {
+    const data = await res.json()
+    return data.data
+  }
+}
+
+export const updateTask = async (id, content) => {
+  const res = await fetch(new Request(createUrl(`/api/tasks/${id}`)), {
+    method: 'PATCH',
+    body: JSON.stringify(content)
+  })
+
+  if (res.ok) {
+    const data = await res.json()
+    return data.data
+  }
+}
