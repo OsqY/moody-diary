@@ -1,5 +1,6 @@
 import { getUserByClerkId } from "@/utils/auth"
 import { prisma } from "@/utils/db"
+import { revalidatePath } from "next/cache"
 import { NextResponse } from "next/server"
 
 export const PATCH = async (request: Request, { params }) => {
@@ -19,6 +20,21 @@ export const PATCH = async (request: Request, { params }) => {
       status,
     }
   })
-
+  revalidatePath('/tasks')
   return NextResponse.json({ data: { ...updatedTask } })
+}
+
+export const DELETE = async (request: Request, { params }) => {
+  const user = await getUserByClerkId()
+  await prisma.task.delete({
+    where: {
+      userId_id: {
+        userId: user.id,
+        id: params.id,
+      },
+    }
+  })
+
+  revalidatePath('/tasks')
+  return NextResponse.json({ status: "deleted" })
 }

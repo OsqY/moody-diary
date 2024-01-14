@@ -5,8 +5,9 @@ import Link from "next/link"
 const links = [
   { href: '/', label: 'Home' },
   { href: '/journal', label: 'Journal' },
-  { href: '/history', label: 'History' },
+  { href: '/history', label: 'Mood History' },
   { href: '/tasks', label: 'Tasks' },
+  { href: '/journal/ai-ask', label: 'Ask AI' }
 ]
 
 const DashboardLayout = ({ children }) => {

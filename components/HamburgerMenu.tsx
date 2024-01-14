@@ -2,13 +2,13 @@
 
 import Moody_Logo from "../public/Moody Logo (1)_prev_ui.png"
 import React, { useEffect, useState } from "react";
-import { AiOutlineHome } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { BsFillJournalBookmarkFill, BsShare } from "react-icons/bs";
+import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { TbHistory } from "react-icons/tb"
 import { FaHome, FaTasks } from "react-icons/fa"
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
+import { RiRobot2Fill } from "react-icons/ri"
 import Link from "next/link";
 
 const HamburgerMenu = ({ links }) => {
@@ -34,6 +34,11 @@ const HamburgerMenu = ({ links }) => {
       icon: <FaTasks className="text-2xl" />,
       title: links[3].label,
       href: links[3].href,
+    },
+    {
+      icon: <RiRobot2Fill className="text-2xl" />,
+      title: links[4].label,
+      href: links[4].href,
     },
   ];
 
@@ -75,7 +80,6 @@ const HamburgerMenu = ({ links }) => {
           alt="Logo"
         />
       </div>
-
       <div className="h-full w-full px-6 flex items-center justify-end">
         <UserButton />
       </div>

@@ -8,7 +8,7 @@ const getTask = async (id) => {
     where: {
       userId_id: {
         userId: user.id,
-        id,
+        id: id,
       }
     }
   })
@@ -16,8 +16,8 @@ const getTask = async (id) => {
 }
 
 
-const TaskPage = ({ params }) => {
-  const task = getTask(params.id)
+const TaskPage = async ({ params }) => {
+  const task = await getTask(params.id)
   return (
     <div className="h-full w-full">
       <TaskEditor task={task} />
