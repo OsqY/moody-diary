@@ -43,10 +43,11 @@ model Task {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  title    String
-  content  String       @db.Text
-  priority TaskPriority @default(LOW)
-  status   TaskStatus   @default(PENDING)
+  title      String
+  content    String       @db.Text
+  priority   TaskPriority @default(LOW)
+  status     TaskStatus   @default(PENDING)
+  finishedAt DateTime     @default(now())
 
   @@unique([userId, id])
 }

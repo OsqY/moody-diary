@@ -29,7 +29,7 @@ const Editor = ({ entry }) => {
   })
 
   const handleDelete = async () => {
-    const status = await deleteEntry(entry.id)
+    const status = await deleteEntry(task.id)
     if (status) {
       router.push('/journal')
     }

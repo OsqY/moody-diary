@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { NextResponse } from "next/server"
 
 export const PATCH = async (request: Request, { params }) => {
-  const { title, content, status, priority } = await request.json()
+  const { title, content, status, priority, finishedAt } = await request.json()
   const user = await getUserByClerkId()
   const updatedTask = await prisma.task.update({
     where: {
@@ -18,6 +18,7 @@ export const PATCH = async (request: Request, { params }) => {
       content,
       priority,
       status,
+      finishedAt,
     }
   })
   revalidatePath('/tasks')

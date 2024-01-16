@@ -5,6 +5,10 @@ import { useState } from "react"
 import { useAutosave } from "react-autosave"
 import { TaskStatus, TaskPriority } from "@prisma/client"
 import { useRouter } from "next/navigation"
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker"
+import { LocalizationProvider } from "@mui/x-date-pickers"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+import dayjs from "dayjs"
 
 const TaskEditor = ({ task }) => {
   const [value, setValue] = useState({
@@ -12,6 +16,7 @@ const TaskEditor = ({ task }) => {
     content: task.content,
     priority: task.priority,
     status: task.status,
+    finishedAt: dayjs(task.finishedAt)
   })
   function handleTitleChange(e) {
     setValue({
@@ -37,6 +42,12 @@ const TaskEditor = ({ task }) => {
       status: e.target.value,
     })
   }
+  function handleFinishedTaskDateChange(selectedDateTime) {
+    setValue({
+      ...value,
+      finishedAt: dayjs(selectedDateTime)
+    })
+  }
   const [isLoading, setIsLoading] = useState(false)
   useAutosave({
     data: value,
@@ -48,7 +59,7 @@ const TaskEditor = ({ task }) => {
   })
   const router = useRouter()
   const handleDelete = async () => {
-    const status = await deleteTask(task.id, task)
+    const status = await deleteTask(task.id)
     if (status) {
       router.push('/tasks')
     }
@@ -67,7 +78,13 @@ const TaskEditor = ({ task }) => {
           <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title for your task</label>
           <input value={value.title} onChange={handleTitleChange} id="message" className="block p-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none mb-4" placeholder="Walk Clifford" />
           <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description of your task</label>
-          <textarea value={value.content} onChange={handleContentChange} id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none mb-4" placeholder="Remember to walk Clifford at 9:00 a.m" />
+          <textarea value={value.content} onChange={handleContentChange} id="message" rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none mb-4" placeholder="Remember to walk Clifford at 9:00 a.m" />
+          <label htmlFor="finishedAt" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">When your task is going to be finished.</label>
+          <div className="mb-4">
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker value={dayjs(value.finishedAt)} onChange={handleFinishedTaskDateChange} views={['year', 'month', 'day', 'hours', 'minutes']} className="bg-white" />
+            </LocalizationProvider>
+          </div>
           <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task Status</label>
           <select value={value.status} onChange={handleStatusChange} id="status" className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value={TaskStatus.PENDING}>Pending</option>
