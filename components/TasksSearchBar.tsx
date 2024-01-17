@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { useDebounce } from "@uidotdev/usehooks"
 
-const TaskSearchBar = ({ search }: { search?: string }) => {
+const TaskSearchBar = ({ search }: { search?: string }, { page }: { page?: number }) => {
   const router = useRouter()
   const initialRender = useRef(true)
 
@@ -18,11 +18,19 @@ const TaskSearchBar = ({ search }: { search?: string }) => {
       return
     }
     if (!query) {
-      router.push('/tasks')
+      if (page) {
+        router.push(`/tasks?page=${page}`)
+      } else {
+        router.push('/tasks')
+      }
     } else {
-      router.push(`/tasks?search=${query}`)
+      if (page) {
+        router.push(`/tasks?search=${query}&page=${page}`)
+      } else {
+        router.push(`/tasks?search=${query}`)
+      }
     }
-  }, [query, router])
+  }, [query, page])
 
   return (
     <div className='relative rounded-md shadow-sm'>
@@ -33,7 +41,7 @@ const TaskSearchBar = ({ search }: { search?: string }) => {
       </div>
       <input
         value={text}
-        placeholder='Search journal entries'
+        placeholder='Search tasks'
         onChange={e => setText(e.target.value)}
         className='block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
       />
