@@ -9,7 +9,7 @@ const getEntry = async (id) => {
     where: {
       userId_id: {
         userId: user.id,
-        id: id,
+        id,
       },
     },
     include: {
@@ -21,6 +21,8 @@ const getEntry = async (id) => {
 
 const EntryPage = async ({ params }) => {
   const entry = await getEntry(params.id)
+  console.log(params.id)
+  console.log(entry)
   return (
     <div className="h-full w-full">
       <Editor entry={entry} />

@@ -31,11 +31,10 @@ export const PATCH = async (request: Request, { params }) => {
     },
     update: analysis,
   })
-  revalidatePath('/journal')
   return NextResponse.json({ data: { ...updatedEntry, analysis: updated } })
 }
 
-export const DELETE = async (request: Request, { params }) => {
+export const DELETE = async ({ params }) => {
   const user = await getUserByClerkId()
   await prisma.journalEntry.delete({
     where: {
@@ -45,6 +44,5 @@ export const DELETE = async (request: Request, { params }) => {
       }
     }
   })
-  revalidatePath('/journal')
   return NextResponse.json({ status: "deleted" })
 }

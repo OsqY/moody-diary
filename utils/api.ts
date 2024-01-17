@@ -2,6 +2,16 @@ const createUrl = (path) => {
   return window.location.origin + path
 }
 
+export const getEntries = async (content: string) => {
+  const res = await fetch(new Request(createUrl(`/api/journal?content=${content}`), {
+    method: 'GET'
+  }))
+  if (res.ok) {
+    const data = await res.json()
+    return data.data
+  }
+}
+
 export const updateEntry = async (id, content) => {
   const res = await fetch(new Request(createUrl(`/api/journal/${id}`), {
     method: 'PATCH',
