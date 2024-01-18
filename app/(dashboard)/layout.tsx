@@ -1,13 +1,12 @@
 import HamburgerMenu from "@/components/HamburgerMenu"
-import { UserButton } from "@clerk/nextjs"
-import Link from "next/link"
 
 const links = [
   { href: '/', label: 'Home' },
   { href: '/journal', label: 'Journal' },
   { href: '/history', label: 'Mood History' },
   { href: '/tasks', label: 'Tasks' },
-  { href: '/journal/ai-ask', label: 'Ask AI' }
+  { href: '/journal/ai-ask', label: 'Ask AI' },
+  { href: '/user-expenses', label: 'User Expenses' },
 ]
 
 const DashboardLayout = ({ children }) => {

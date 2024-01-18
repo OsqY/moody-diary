@@ -16,11 +16,12 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  clerkId  String         @unique
-  email    String         @unique
-  entries  JournalEntry[]
-  Analysis Analysis[]
-  Task     Task[]
+  clerkId   String         @unique
+  email     String         @unique
+  entries   JournalEntry[]
+  Analysis  Analysis[]
+  Task      Task[]
+  UserCosts UserCosts[]
 }
 
 enum TaskPriority {
@@ -86,4 +87,50 @@ model Analysis {
 
   @@unique([entryId])
   @@index([userId])
+}
+
+model UserCosts {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId   String
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Expenses Expenses[]
+  Incomes  Incomes[]
+
+  @@unique([userId])
+  @@index([id])
+}
+
+model Expenses {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  amount      Float
+  description String
+  category    String
+
+  userCostsId String
+  userCosts   UserCosts @relation(fields: [userCostsId], references: [id])
+
+  @@unique([userCostsId])
+  @@index([id])
+}
+
+model Incomes {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  amount      Float
+  description String
+  category    String
+
+  userCostsId String
+  userCosts   UserCosts @relation(fields: [userCostsId], references: [id])
+
+  @@unique([userCostsId])
+  @@index([id])
 }
