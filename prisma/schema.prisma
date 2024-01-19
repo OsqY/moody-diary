@@ -115,7 +115,7 @@ model Expenses {
   userCostsId String
   userCosts   UserCosts @relation(fields: [userCostsId], references: [id])
 
-  @@unique([userCostsId])
+  @@unique([userCostsId, id])
   @@index([id])
 }
 
@@ -131,6 +131,6 @@ model Incomes {
   userCostsId String
   userCosts   UserCosts @relation(fields: [userCostsId], references: [id])
 
-  @@unique([userCostsId])
+  @@unique([userCostsId, id])
   @@index([id])
 }

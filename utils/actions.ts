@@ -52,7 +52,6 @@ export const getTasks = async (search: string | undefined, limit: number, page: 
   const limitQuery = typeof limit === 'number' ? limit : undefined;
   const pageQuery = typeof page === 'number' ? page : undefined;
   const offset = (page - 1) * limit
-  console.log(offset)
   let tasks;
 
   if (query || pageQuery || limitQuery) {

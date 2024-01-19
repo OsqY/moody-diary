@@ -7,7 +7,6 @@ import PrevNextButtonsTasks from "@/components/PrevNextButtonsTasks"
 
 const Tasks = async ({ searchParams }: { searchParams: string | undefined }) => {
   const tasks = await getTasks(searchParams?.search || undefined, 5, searchParams?.page || 1)
-  console.log(tasks)
   return (
     <div className="p-10">
       <h2 className="text-white font-bold text-3xl mb-8">Start your objectives!</h2>

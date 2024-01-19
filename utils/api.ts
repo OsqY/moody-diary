@@ -92,3 +92,28 @@ export const deleteTask = async (id) => {
     return status.status
   }
 }
+
+export const createExpense = async (expense) => {
+  const res = await fetch(new Request(createUrl('/api/user-expenses/expenses'), {
+    method: 'POST',
+    body: JSON.stringify(expense)
+  }))
+
+  if (res.ok) {
+    const status = await res.json()
+    return status.status
+  }
+}
+
+
+export const createIncome = async (income) => {
+  const res = await fetch(new Request(createUrl('/api/user-expenses/incomes'), {
+    method: 'POST',
+    body: JSON.stringify(income)
+  }))
+
+  if (res.ok) {
+    const status = await res.json()
+    return status.status
+  }
+}
