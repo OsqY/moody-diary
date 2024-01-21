@@ -5,8 +5,9 @@ import { Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length && payload[0].payload) {
     return (
-      <div className="p-2 bg-white shadow rounded">
-        <p className="label text-black">{`${payload[0].payload.category} : ${payload[0].value}`}</p>
+      <div className="p-4 custom-tooltip bg-black shadow-md border border-black/10 rounded-lg relative text-white">
+        <p className="intro text-sm font-bold">{payload[0].payload.amount}</p>
+        <p className="intro text-sm font-bold">{payload[0].payload.category}</p>
       </div>
     )
   }
@@ -17,7 +18,7 @@ const renderLabel = (entry) => {
   return entry.description
 }
 
-const IncomesPieChart = ({ data }) => {
+const IncomesPieChart = ({ data, onPieClick }) => {
   return (
     <ResponsiveContainer width={"100%"} height={"100%"}>
       <PieChart>
@@ -29,7 +30,8 @@ const IncomesPieChart = ({ data }) => {
           cy={"50%"}
           outerRadius={56}
           fill="#1976D2"
-          label={renderLabel} />
+          label={renderLabel}
+          onClick={onPieClick} />
         <Tooltip content={<CustomTooltip />} />
       </PieChart>
     </ResponsiveContainer>

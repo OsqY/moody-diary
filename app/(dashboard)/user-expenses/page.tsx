@@ -46,7 +46,7 @@ const UserCosts = async () => {
   const totalEconomy = sum()
   return (
     <div>
-      <span className='flex my-4 justify-center animate-background-shine bg-[linear-gradient(110deg,#939393,45%,#1e293b,55%,#939393)] bg-[length:250%_100%] bg-clip-text text-xl text-transparent'>
+      <span className='flex my-4 justify-center animate-background-shine bg-[linear-gradient(110deg,#A2A2A2,45%,#1e293b,55%,#A2A2A2)] bg-[length:250%_100%] bg-clip-text text-xl text-transparent'>
         <h1 className="text-2xl font-semibold">
           User costs
         </h1>
@@ -62,11 +62,21 @@ const UserCosts = async () => {
           }
         </div>
       </div>
-      <span className='flex my-4 justify-center animate-text-gradient bg-gradient-to-r from-[#b2a8fd] via-[#8678f9] to-[#c7d2fe] bg-[200%_auto] bg-clip-text text-xl text-transparent'>
-        <h1 className="text-xl font-semibold">
-          User Economy: {totalEconomy}
-        </h1>
-      </span>
+      <h1 className="text-xl font-semibold">
+        {totalEconomy <= 0 ? (
+          <span className='flex my-4 justify-center bg-gradient-to-t from-[#5C7BF9] to-[#1976D2] bg-clip-text text-xl text-transparent'>
+            User Economy: {totalEconomy}
+          </span>
+        )
+          : (
+            <span className='flex my-4 justify-center bg-gradient-to-t from-[#5C7BF9] to-[#1976D2] bg-clip-text text-xl text-transparent'>
+              User Economy: {totalEconomy}
+            </span>
+
+          )
+
+        }
+      </h1>
     </div>
   );
 }

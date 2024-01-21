@@ -105,6 +105,29 @@ export const createExpense = async (expense) => {
   }
 }
 
+export const updateExpense = async (id, expense) => {
+  const res = await fetch(new Request(createUrl(`/api/user-expenses/expenses/${id}`), {
+    method: 'PATCH',
+    body: JSON.stringify(expense)
+  }))
+  if (res.ok) {
+    const status = await res.json()
+    return status.status
+  }
+}
+
+export const deleteExpense = async (id: string) => {
+  const res = await fetch(new Request(createUrl(`/api/user-expenses/expenses/${id}`), {
+    method: 'DELETE'
+  }))
+
+  if (res.ok) {
+    const status = await res.json()
+    return status.status
+  } else {
+    return res.status
+  }
+}
 
 export const createIncome = async (income) => {
   const res = await fetch(new Request(createUrl('/api/user-expenses/incomes'), {

@@ -5,6 +5,7 @@ const config: Config = {
     extend: {
       animation: {
         'background-shine': 'background-shine 4s linear infinite',
+        "text-gradient": "text-gradient 1.5s linear infinite",
       },
       keyframes: {
         'background-shine': {

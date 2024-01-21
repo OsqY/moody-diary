@@ -21,6 +21,11 @@ const Incomes = async () => {
   const incomes = await getIncomes()
   return (
     <div>
+      <span className='flex my-4 justify-center animate-background-shine bg-[linear-gradient(110deg,#1976d2,45%,#D1D1D1,55%,#1976d2)] bg-[length:250%_100%] bg-clip-text text-xl text-transparent'>
+        <h1 className="text-2xl font-semibold">
+          User Incomes
+        </h1>
+      </span>
       <div className="mt-4 w-full h-64 p-4">
         {incomes.length ? (
           <IncomesPieChart data={incomes} />
