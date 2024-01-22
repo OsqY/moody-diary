@@ -35,6 +35,7 @@ const UserCostsPieChart = ({ incomes, expenses }) => {
         />
 
         <Pie
+          className="font-semibold"
           dataKey={"amount"}
           isAnimationActive={false}
           data={incomes}

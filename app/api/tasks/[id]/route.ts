@@ -25,13 +25,14 @@ export const PATCH = async (request: Request, { params }) => {
   return NextResponse.json({ data: { ...updatedTask } })
 }
 
-export const DELETE = async ({ params }) => {
+export const DELETE = async (request: Request, { params }: { params: { id: string } }) => {
+  const { id } = params
   const user = await getUserByClerkId()
   await prisma.task.delete({
     where: {
       userId_id: {
         userId: user.id,
-        id: params.id,
+        id,
       },
     }
   })

@@ -53,7 +53,7 @@ const TaskEditor = ({ task }) => {
     data: value,
     onSave: async (_value) => {
       setIsLoading(true)
-      const _ = await updateTask(task.id, _value)
+      await updateTask(task.id, _value)
       setIsLoading(false)
     }
   })

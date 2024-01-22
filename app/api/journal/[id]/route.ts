@@ -1,7 +1,7 @@
 import { analyze } from "@/utils/ai"
 import { getUserByClerkId } from "@/utils/auth"
 import { prisma } from "@/utils/db"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
 export const PATCH = async (request: Request, { params }) => {
   const { content } = await request.json()
@@ -34,13 +34,14 @@ export const PATCH = async (request: Request, { params }) => {
   return NextResponse.json({ data: { ...updatedEntry, analysis: updated } })
 }
 
-export const DELETE = async ({ params }) => {
+export const DELETE = async (request: Request, { params }: { params: { id: string } }) => {
+  const { id } = params
   const user = await getUserByClerkId()
   await prisma.journalEntry.delete({
     where: {
       userId_id: {
         userId: user.id,
-        id: params.id
+        id,
       }
     }
   })

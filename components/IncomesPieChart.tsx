@@ -23,6 +23,7 @@ const IncomesPieChart = ({ data, onPieClick }) => {
     <ResponsiveContainer width={"100%"} height={"100%"}>
       <PieChart>
         <Pie
+          className="font-semibold"
           dataKey={"amount"}
           isAnimationActive={false}
           data={data}

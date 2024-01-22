@@ -27,7 +27,8 @@ export const PATCH = async (request: Request, { params }) => {
   return NextResponse.json({ status: "updated" })
 }
 
-export const DELETE = async ({ params }) => {
+export const DELETE = async (request: Request, { params }: { params: { id: string } }) => {
+  const { id } = params
   const user = await getUserByClerkId()
   const userCosts = await prisma.userCosts.findUnique({
     where: {
@@ -38,7 +39,7 @@ export const DELETE = async ({ params }) => {
     where: {
       userCostsId_id: {
         userCostsId: userCosts?.id,
-        id: params.id,
+        id,
       }
     }
   })
