@@ -9,7 +9,7 @@ const Editor = ({ entry }) => {
   const router = useRouter()
   const [value, setValue] = useState(entry?.content ?? "Write about your day")
   const [isLoading, setIsLoading] = useState(false)
-  const [analysis, setAnalysis] = useState(entry)
+  const [analysis, setAnalysis] = useState(entry.analysis)
 
   const { mood, summary, color, subject, negative } = analysis ?? {}
   const analysisData = [

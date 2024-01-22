@@ -5,7 +5,7 @@ import { NextResponse } from "next/server"
 export const PATCH = async (request: Request, { params }) => {
   const { amount, description, category } = await request.json()
   const user = await getUserByClerkId()
-  const userCosts = await prisma.userCosts.findFirst({
+  const userCosts = await prisma.userCosts.findUnique({
     where: {
       userId: user.id
     }
@@ -29,12 +29,11 @@ export const PATCH = async (request: Request, { params }) => {
 
 export const DELETE = async ({ params }) => {
   const user = await getUserByClerkId()
-  const userCosts = await prisma.userCosts.findFirst({
+  const userCosts = await prisma.userCosts.findUnique({
     where: {
       userId: user.id
     }
   })
-  console.log(params.id)
   await prisma.expenses.delete({
     where: {
       userCostsId_id: {

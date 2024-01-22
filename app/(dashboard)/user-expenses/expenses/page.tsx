@@ -4,7 +4,7 @@ import ClientSideExpenses from "@/components/ClientSideExpenses"
 
 const getExpenses = async () => {
   const user = await getUserByClerkId()
-  const userCosts = await prisma.userCosts.findFirst({
+  const userCosts = await prisma.userCosts.findUnique({
     where: {
       userId: user.id,
     }

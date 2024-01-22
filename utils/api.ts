@@ -1,3 +1,5 @@
+import { create } from "domain"
+
 const createUrl = (path) => {
   return window.location.origin + path
 }
@@ -133,6 +135,28 @@ export const createIncome = async (income) => {
   const res = await fetch(new Request(createUrl('/api/user-expenses/incomes'), {
     method: 'POST',
     body: JSON.stringify(income)
+  }))
+
+  if (res.ok) {
+    const status = await res.json()
+    return status.status
+  }
+}
+
+export const updateIncome = async (id: string, income) => {
+  const res = await fetch(new Request(createUrl(`/api/user-expenses/incomes/${id}`), {
+    method: 'PATCH',
+    body: JSON.stringify(income)
+  }))
+  if (res.ok) {
+    const status = await res.json()
+    return status.status
+  }
+}
+
+export const deleteIncome = async (id: string) => {
+  const res = await fetch(new Request(createUrl(`/api/user-expenses/incomes/${id}`), {
+    method: 'DELETE'
   }))
 
   if (res.ok) {

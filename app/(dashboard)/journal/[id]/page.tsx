@@ -9,7 +9,7 @@ const getEntry = async (id) => {
     where: {
       userId_id: {
         userId: user.id,
-        id,
+        id: id,
       },
     },
     include: {

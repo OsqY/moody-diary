@@ -4,7 +4,7 @@ import { prisma } from "@/utils/db"
 
 const getIncomes = async () => {
   const user = await getUserByClerkId()
-  const userCosts = await prisma.userCosts.findFirst({
+  const userCosts = await prisma.userCosts.findUnique({
     where: {
       userId: user.id
     }
@@ -18,7 +18,7 @@ const getIncomes = async () => {
 
 const getExpenses = async () => {
   const user = await getUserByClerkId()
-  const userCosts = await prisma.userCosts.findFirst({
+  const userCosts = await prisma.userCosts.findUnique({
     where: {
       userId: user.id
     }
