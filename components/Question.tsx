@@ -31,8 +31,8 @@ const Question = () => {
         <span className="sr-only">Loading...</span>
       </div>}
       <form onSubmit={handleSubmit}>
-        <input disabled={isLoading} onChange={onChange} value={value} type="text" placeholder="Ask a Question" className="border border-white/80 px-4 p-3 text-lg rounded-lg text-black outline-none" />
-        <button disabled={isLoading} type="submit" className="bg-white text-black font-semibold duration-300 rounded-lg p-3 hover:bg-white/80 ml-4 px-10">Ask</button>
+        <input disabled={isLoading} onChange={onChange} value={value} type="text" placeholder="Ask a Question" className="border border-white/80 px-2 py-2 text-sm md:text-lg rounded-lg text-black outline-none mb-2" />
+        <button disabled={isLoading} type="submit" className="bg-white text-black font-semibold duration-300 text-sm md:text-lg rounded-lg p-2 hover:bg-white/80 ml-4 px-5 md:px-10">Ask</button>
       </form>
       {response && <div className="mt-2">{response} </div>}
     </div>
