@@ -27,6 +27,15 @@ const Editor = ({ entry }) => {
       setIsLoading(false)
     },
   })
+  useAutosave({
+    data: value,
+    onSave: async (_value) => {
+      setIsLoading(true)
+      const updated = await updateEntry(entry.id, _value)
+      setAnalysis(updated.analysis)
+      setIsLoading(false)
+    },
+  })
 
   const handleDelete = async () => {
     const status = await deleteEntry(entry.id)
